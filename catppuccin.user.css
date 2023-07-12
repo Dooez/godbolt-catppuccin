@@ -182,8 +182,6 @@
 
   $shaded-accent =  blend(alpha($accent-color, 0.7), $base)
 
-
-
   // Navigation
   html[data-theme=dark] .bg-light,
   html[data-theme=dark] .navbar-light,
@@ -199,6 +197,20 @@
         color: $text  !important;
   }
 
+  html[data-theme=dark] .community-advert
+  {
+    background-color: $base !important;
+    border-color: $shaded-accent;
+  }
+  html[data-theme=dark] .community-advert button
+  {
+    color: $shaded-accent;
+  }
+  html[data-theme=dark] .community-advert button:hover
+  {
+    color: $red;
+  }
+
   html[data-theme=dark] .nav.nav-tabs li a
   {
         background-color: $surface0 !important;
@@ -211,6 +223,18 @@
   html[data-theme=dark] .nav.nav-tabs .active
   {
         border-color: $text !important;
+  }
+
+  html[data-theme=dark] ::-webkit-scrollbar {
+        background-color: $base;
+  }
+  html[data-theme=dark] ::-webkit-scrollbar-thumb
+  {
+        background-color: $surface1;
+  }
+  html[data-theme=dark] ::-webkit-scrollbar-thumb:hover
+  {
+        background-color: $surface2;
   }
 
   //Icons
@@ -307,6 +331,16 @@
        border-color: $shaded-accent !important;
   }
 
+  html[data-theme=dark] .btn-outline-secondary
+  {
+    border-color: $surface0 !important;
+  }
+
+  html[data-theme=dark] .btn-outline-secondary:hover
+  {
+    background-color: $surface0 !important;
+  }
+
   // Dropdown menus
 
   html[data-theme=dark] .ts-dropdown,
@@ -346,8 +380,10 @@
   // Inputs
 
   html[data-theme=dark] .envvars,
-  html[data-theme=dark] input
+  html[data-theme=dark] input,
+  html[data-theme=dark] .input-group-text
   {
+        border-color: $surface1 !important;
         background-color: $surface1 !important;
         color: $subtext0 !important;
   }
@@ -403,9 +439,15 @@
       border-color: $crust !important;
       color: $text !important;
   }
+
   // Output
+  .diffOverview{
+    border-color: $base !important;
+    background-color: $base !important;
+  }
   .content
   {
+      border-color: $base !important;
       background-color: $base !important;
       color: $text !important;
   }
@@ -415,8 +457,25 @@
   {
       color: $text !important;
   }
+  // Tree
+  html[data-theme=dark] .tree,
+  html[data-theme=dark] .tree li
+  {
+    border-color: $base;
+    background-color: $base !important;
+  }
+  html[data-theme=dark] .tree li.tree-editor-file
+  {
+    border-color: $surface0;
+    background-color: $surface0 !important;
+  }
+  html[data-theme=dark] .tree li.tree-editor-file:hover
+  {
+    border-color: $surface1;
+    background-color: $surface1 !important;
+  }
 
- // Editor
+  // Editor
 
   // Base colors
   if (theme=="Latte") {
@@ -473,6 +532,10 @@
     --vscode-dropdown-listBackground: $surface2;
     --vscode-dropdown-border: $accent-color;
     --vscode-dropdown-foreground: $text;
+    --vscode-quickInput-background: $mantle;
+    --vscode-quickInput-foreground: $text;
+    --vscode-quickInputList-focusForeground: $text;
+    --vscode-quickInputList-focusBackground: $surface0;
 
     // debug icons
     --vscode-debugIcon-breakpointForeground: $red;
@@ -583,6 +646,7 @@
     --vscode-editorWidget-background: $mantle;
     --vscode-editorWidget-foreground: $text;
     --vscode-editorWidget-resizeBorder: $surface2;
+    --vscode-editorWidget-border: $surface2;
     --vscode-editorLightBulb-foreground: $yellow;
 
     --vscode-input-background: $surface0;
