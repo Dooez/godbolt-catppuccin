@@ -1,6 +1,12 @@
 # godbolt-catppuccin
 Soothing pastel theme for Godbolt Compiler Explorer.
 
+<p align="center">
+	<img src="assets/mocha.png"/>
+</p>
+
+The theme is not finished. Assistance is appreciated.
+
 ## Usage
 
 #### Stylus
