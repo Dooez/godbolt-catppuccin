@@ -6,6 +6,7 @@ Soothing pastel theme for Godbolt Compiler Explorer.
 </p>
 
 The theme is not finished. Assistance is appreciated.
+I do not know CSS, don't judge :)
 
 ## Usage
 
