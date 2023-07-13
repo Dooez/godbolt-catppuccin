@@ -1,13 +1,15 @@
 /* ==UserStyle==
 @name           Godbolt Catppuccin
 @namespace      github.com/Dooez/godbolt-catppuccin
-@version        1.0.0
+@version        1.0.1
 @description    Soothing pastel theme for Godbolt Compiler Explorer
 @author         Dooez
 @updateURL      https://github.com/Dooez/godbolt-catppuccin/catppuccin.user.css
 @preprocessor   stylus
 @var select theme "Theme" ["Latte", "Frappe", "Macchiato", "Mocha*"]
-@var select accent-color "Accent" ["Rosewater*", "Flamingo", "Pink", "Mauve", "Red", "Maroon", "Peach", "Yellow", "Green", "Teal", "Blue", "Sapphire", "Sky", "Lavender", "Gray"]
+@var select accent-color "Accent" ["Rosewater", "Flamingo", "Pink", "Mauve", "Red", "Maroon", "Peach", "Yellow", "Green*", "Teal", "Blue", "Sapphire", "Sky", "Lavender", "Gray"]
+@var checkbox flat "Flat appearence" 0
+@var checkbox disable-ruler "Disable ruler" 0
 ==/UserStyle== */
 
 @-moz-document domain("godbolt.org") {
@@ -182,18 +184,35 @@
 
   $shaded-accent =  blend(alpha($accent-color, 0.7), $base)
 
+  if (flat){
+    :root
+    {
+      --nav-color: $base;
+      --nav-hover: $surface1;
+      --inputs: $surface0;
+    }
+  }
+  else{
+    :root
+    {
+      --nav-color: $surface0;
+      --nav-hover: $mantle;
+      --inputs: $surface1;
+    }
+  }
+
   // Navigation
   html[data-theme=dark] .bg-light,
   html[data-theme=dark] .navbar-light,
   html[data-theme=dark] .navbar-light .navbar-nav li a:not(.share-twitter, .share-reddit),
   {
-        background-color: $surface0 !important;
+        background-color: var(--nav-color) !important;
         color: $text  !important;
   }
 
   html[data-theme=dark] .navbar-light .navbar-nav li a:hover
   {
-        background-color: $mantle !important;
+        background-color: var(--nav-hover) !important;
         color: $text  !important;
   }
 
@@ -213,7 +232,7 @@
 
   html[data-theme=dark] .nav.nav-tabs li a
   {
-        background-color: $surface0 !important;
+        background-color: var(--nav-color) !important;
         color: $text  !important; d
   }
   html[data-theme=dark] .nav.nav-tabs li:not(.active) a
@@ -224,17 +243,33 @@
   {
         border-color: $text !important;
   }
-
-  html[data-theme=dark] ::-webkit-scrollbar {
-        background-color: $base;
+  html[data-theme=dark] .top-bar.btn-toolbar.bg-light
+  {
+      border-bottom-color: var(--nav-color) !important;
+  }
+  html[data-theme=dark] .bottom-bar.bg-light
+  {
+      border-top-color: var(--nav-color) !important;
+  }
+  html[data-theme=dark] ::-webkit-scrollbar,
+  html[data-theme=dark] ::-webkit-scrollbar-corner
+  {
+        background-color: var(--nav-color);
   }
   html[data-theme=dark] ::-webkit-scrollbar-thumb
   {
-        background-color: $surface1;
+        background-color: var(--inputs);
   }
   html[data-theme=dark] ::-webkit-scrollbar-thumb:hover
   {
         background-color: $surface2;
+  }
+  if (disable-ruler)
+  {
+    .decorationsOverviewRuler
+    {
+      display: none !important;
+    }
   }
 
   //Icons
@@ -279,15 +314,15 @@
 
   html[data-theme=dark] .btn-light,
   {
-        background-color: $surface0 !important;
-        border-color: $surface0 !important;
+        background-color: var(--nav-color) !important;
+        border-color: var(--nav-color) !important;
         color: $text !important;
   }
 
   html[data-theme=dark] .btn-light:hover,
   {
-        background-color: $mantle !important;
-        border-color: $mantle !important;
+        background-color: var(--nav-hover) !important;
+        border-color: var(--nav-hover) !important;
   }
 
   html[data-theme=dark] .btn-light.active
@@ -333,12 +368,12 @@
 
   html[data-theme=dark] .btn-outline-secondary
   {
-    border-color: $surface0 !important;
+    border-color: var(--nav-color) !important;
   }
 
   html[data-theme=dark] .btn-outline-secondary:hover
   {
-    background-color: $surface0 !important;
+    background-color: var(--nav-color) !important;
   }
 
   // Dropdown menus
@@ -348,24 +383,25 @@
   html[data-theme=dark] .dropdown-item,
   html[data-theme=dark] .dropdown-item,
   {
-        background-color: $surface0 !important;
+        background-color: var(--nav-color) !important;
+        border-color: var(--nav-color) !important;
         color: $text !important;
   }
   html[data-theme=dark] .dropdown-item:hover,
   {
-        background-color: $mantle !important;
+        background-color: var(--nav-hover) !important;
   }
 
   html[data-theme=dark] .ts-wrapper.single .ts-control,
   html[data-theme=dark] .dropdown-input:focus,
   html[data-theme=dark] .ts-dropdown .optgroup-header,
   {
-        background-color: $surface1 !important;
+        background-color: var(--inputs) !important;
         color: $text !important;
   }
   html[data-theme=dark] .option:hover{
-        background-color: hoverColor($surface0) !important;
-        color: $crust !important;
+        background-color:  var(--inputs) !important;
+        color: $text !important;
   }
 
   html[data-theme=dark] .ts-dropdown .optgroup::before{
@@ -383,8 +419,8 @@
   html[data-theme=dark] input,
   html[data-theme=dark] .input-group-text
   {
-        border-color: $surface1 !important;
-        background-color: $surface1 !important;
+        border-color: var(--inputs) !important;
+        background-color: var(--inputs) !important;
         color: $subtext0 !important;
   }
   html[data-theme=dark] .envvars:focus,
@@ -395,7 +431,7 @@
 
   html[data-theme=dark] .form-control,
   {
-        background-color: $surface1 !important;
+        background-color: var(--inputs) !important;
         color: $subtext0 !important;
   }
    html[data-theme=dark] .form-control:focus,
@@ -405,8 +441,10 @@
   }
 
   // Popover
-  html[data-theme=dark] .popover
+  html[data-theme=dark] .popover,
+  html[data-theme=dark] .popover-body
   {
+    background-color: $mantle !important;
     border-color: $mantle !important;
   }
   html[data-theme=dark] .popover-header,
@@ -417,7 +455,7 @@
   }
   html[data-theme=dark] .popover-header
   {
-      border-bottom-color: $surface1;
+      border-bottom-color: var(--inputs);
   }
 
   // Modal
